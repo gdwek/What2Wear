@@ -46,19 +46,17 @@ An Example Outfit:
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
-
 /home - home page
 
 ![home](documentation/home.png)
 
 /signup - page to signup
 
-![signup](documentation/home/signup.png)
+![signup](documentation/signup.png)
 
 /login - page to log in
 
-![login](documentation/home/login.png)
+![login](documentation/login.png)
 
 /outfit - outfit page before user entered an outfit for that weather
 
@@ -70,30 +68,26 @@ An Example Outfit:
 
 /outfit/create - page to log an outfit
 
-![create](documentation/outfit/create.png)
+![create](documentation/create.png)
 
 /outfit/zipcode - page to update location
 
-![zipcode](documentation/outfit/zipcode.png)
+![zipcode](documentation/zipcode.png)
 
 
 
 ## Site map
 
-(___TODO__: draw out a site map that shows how pages are related to each other_)
-
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![sitemap](documentation/sitemap.jpeg)
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
-1. as non-registered user, I can register a new account with the site
+1. as non-registered user, I can register a new account with the site and record my location
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can record outfits associated with the weather
+4. as a user, I can view all outfits I've worn for the associated range of weather
+5. as a user, I can update my location 
+6. as a user, I can see a reccomendation of what to wear if I don't have any recorded outfits for the weather
 
 ## Research Topics
 
