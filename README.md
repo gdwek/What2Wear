@@ -43,23 +43,40 @@ An Example Outfit:
 
 ## [Link to Commented First Draft Schema](db.js) 
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
 
 ## Wireframes
 
 (___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
 
-/list/create - page for creating a new shopping list
+/home - home page
 
-![list create](documentation/list-create.png)
+![home](documentation/home.png)
 
-/list - page for showing all shopping lists
+/signup - page to signup
 
-![list](documentation/list.png)
+![signup](documentation/home/signup.png)
 
-/list/slug - page for showing specific shopping list
+/login - page to log in
 
-![list](documentation/list-slug.png)
+![login](documentation/home/login.png)
+
+/outfit - outfit page before user entered an outfit for that weather
+
+![outfitB4](documentation/outfitInitial.png)
+
+/outfit - outfit page when user has logged outfits for that weather
+
+![outfitAfter](documentation/outfitPost.png)
+
+/outfit/create - page to log an outfit
+
+![create](documentation/outfit/create.png)
+
+/outfit/zipcode - page to update location
+
+![zipcode](documentation/outfit/zipcode.png)
+
+
 
 ## Site map
 
