@@ -119,8 +119,6 @@ An Example Outfit:
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
 1. [locations API](https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/postalcodes/search) - API documentation
 2. [current conditions API](https://developer.accuweather.com/accuweather-current-conditions-api/apis/get/currentconditions/v1/%7BlocationKey%7D) - API documentation
 3. [Just-validate](https://www.cssscript.com/custom-html5-form-validator-vanilla-javascript-just-validate/) - Javascript library Just-validate for client side form validation
