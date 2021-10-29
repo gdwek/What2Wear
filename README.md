@@ -46,19 +46,17 @@ An Example Outfit:
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
-
 /home - home page
 
 ![home](documentation/home.png)
 
 /signup - page to signup
 
-![signup](documentation/home/signup.png)
+![signup](documentation/signup.png)
 
 /login - page to log in
 
-![login](documentation/home/login.png)
+![login](documentation/login.png)
 
 /outfit - outfit page before user entered an outfit for that weather
 
@@ -70,11 +68,11 @@ An Example Outfit:
 
 /outfit/create - page to log an outfit
 
-![create](documentation/outfit/create.png)
+![create](documentation/create.png)
 
 /outfit/zipcode - page to update location
 
-![zipcode](documentation/outfit/zipcode.png)
+![zipcode](documentation/zipcode.png)
 
 
 
