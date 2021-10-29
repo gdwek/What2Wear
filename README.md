@@ -5,7 +5,7 @@
 
 Ever find yourself opening the weather app, seeing "60 degrees and windy" and thinking, "Okay, but what the heck do I wear?" What2Wear is for you! 
 
-What2Wear is a web app that will allow users to record what they have worn in the past for certain temperatures. Users can register and login. Once they're logged in, they can enter their location, and they will be told the current weather and what they wore when it was this weather in the past. If the user hasn't logged anything for that temperature range, they will be provided with a reccomendation of what to wear and prompted to log what they actually end up wearing that day for future purposes.
+What2Wear is a web app that will allow users to record what they have worn in the past for certain temperatures. Users can register and login. Once they're logged in, they will be told the current weather and what they wore when it was this weather in the past. If the user hasn't logged anything for that temperature range, they will be provided with a reccomendation of what to wear and the option what they actually end up wearing that day for future purposes, or to change their location.
 
 
 ## Data Model
@@ -108,8 +108,6 @@ An Example Outfit:
 
 
 ## [Link to Initial Main Project File](app.js) 
-
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
 
 ## Annotations / References Used
 
