@@ -3,17 +3,11 @@
 <span class="success">Currently logged in as: {{user}}</span>
 <a href="create">Enter an Outfit</a> or  <a href="zipcode">Change Location</a> or <a href="logout">Log Out</a>. 
 {{#if user.outfits}}
-
-<h1>Outfits</h1>
-
-<form>
-    {{#each outfits as |o|}}
-	<input type="checkbox" id={{outfits.indexOf(o)}} name= {{outfits.indexOf(o)}} value={{o}}>
-    <label for={{outfits.indexOf(o)}}> {{o}}</label><br>
-    {{/each}}
-  <input type="submit" value="Delete">
-</form>
-
+<ul>
+{{#each user.outfits}}
+	<li>{{this}}</li>
+{{/each}}
+</ul>
 {{/if}}
 {{else}}
 <span class="error">Not logged in</span>. <a href="signup">Sign Up</a> or <a href="login">login</a>.
