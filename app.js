@@ -72,7 +72,7 @@ app.get('/manage', (req, res) => {
 });
 
 app.get('/view', (req, res) => {
-  User.findOne({username: req.body.username}, (err, user) => {
+  User.findOne({username: req.session.username}, (err, user) => {
     if(err){
       console.log('error');
       return res.send('an error has occurred, please check the server output');
