@@ -74,7 +74,7 @@ app.get('/create', (req, res) => {
 app.get("/logout", function(req, res) {
     req.session.destroy(() => {
      delete req.user 
-     res.redirect("/"); //Inside a callback… bulletproof!
+     res.redirect("/"); 
     });
 });
 
@@ -201,7 +201,7 @@ app.post('/zipcode', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
-  console.log(req.session.username);
+  //console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
           new Outfit({
@@ -213,7 +213,7 @@ app.post('/create', (req, res) => {
             temp: 67
         }).save(function(err, user) {
             if(err){
-                console.log('error');
+                console.log(err);
                 return res.send('an error has occurred, please check the server output');
             }
             //redirect
