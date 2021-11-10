@@ -78,7 +78,7 @@ app.get('/view', (req, res) => {
       console.log('error');
       return res.send('an error has occurred, please check the server output');
     }
-    else{
+    else if (user){
       var outfits = [];
       user.outfits.forEach((value, array) => {
         Outfit.findOne({_id: value}, (err, outfit) => {
@@ -95,6 +95,9 @@ app.get('/view', (req, res) => {
         });
       });
       res.render('view', {'outfits': outfits});
+    }
+    else {
+      return res.render('error', {'message' : 'user does not exist'});
     }
   });
 });
