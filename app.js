@@ -204,6 +204,8 @@ app.post('/create', (req, res) => {
   //console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
+          console.log(req.body.jacket);
+          console.log(req.body.scarf_gloves);
           new Outfit({
             user: user,
             top: req.body.top,
