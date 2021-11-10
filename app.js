@@ -67,9 +67,21 @@ app.get('/changedZipcode', (req, res) => {
   res.render('changedZipcode');
 });
 
-app.get('/create', (req, res) => {
-  res.render('create');
+app.get('/manage', (req, res) => {
+  res.render('manage');
+});
+
+app.get('/view', (req, res) => {
+  User.findOne({username: req.body.username}, (err, user) => {
+    if(err){
+      console.log('error');
+      return res.send('an error has occurred, please check the server output');
+    }
+    else{
+      res.render('view', {'outfits': user.outfits});
+    }
   });
+});
 
 app.get("/logout", function(req, res) {
     req.session.destroy(() => {
@@ -78,17 +90,8 @@ app.get("/logout", function(req, res) {
     });
 });
 
-app.post('/delete', (req, res) => {
-  Outfit.deleteOne({ _id: req.outfitID }, function(err, outfit) {
-      if (err){
-        console.log(err); 
-        return res.send('an error occurred, please see the server logs for more information');
-      }
-      else {
-        return res.render('index', {'user': outfit.user.username, 'outfits': outfit.user.outfits});
-      }
-  });
-});
+
+
 
 app.post('/login', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
@@ -98,13 +101,7 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          if(user.outfits.length!= 0){
-                            return res.render('index', {'user': user.username, 'outfits': user.outfits});
-                          }
-                          else{
-                            return res.redirect('/');
-                          }
-                          
+                          return res.redirect('/');
                       } 
                       else {
                           console.log(err); 
@@ -254,7 +251,7 @@ app.post('/create', (req, res) => {
                 user.outfits.push(outfit);
             }
             user.save();
-            res.render('index', {'user': user.username, 'outfits': user.outfits});
+            res.redirect('/');
         });
 
         }
@@ -267,6 +264,20 @@ app.post('/create', (req, res) => {
       }
     });
 });
+
+app.post('/delete', (req, res) => {
+  Outfit.deleteOne({ _id: req.outfitID }, function(err) {
+      if (err){
+        console.log(err); 
+        return res.send('an error occurred, please see the server logs for more information');
+      }
+      else {
+        return res.redirect("/");
+      }
+  });
+});
+
+
 
 let port = process.env.PORT;
 if (port == null || port == "") {

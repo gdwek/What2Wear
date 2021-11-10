@@ -1,0 +1,8 @@
+<h1>Outfits</h1>
+{{#if outfits}}
+<ul>
+{{#each outfits}}
+	<li>{{this._id}} {{this.top}}{{this.bottom}}{{this.jacket}{{this.scarf_gloves}}{{this.temp}}</li>
+{{/each}}
+</ul>
+{{/if}}
