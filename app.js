@@ -78,7 +78,7 @@ app.get('/view', (req, res) => {
       return res.send('an error has occurred, please check the server output');
     }
     else{
-      var outfits;
+      var outfits = [];
       user.outfits.forEach((value, array) => {
         Outfit.findOne({_id: value}, (err, outfit) => {
           if(err){
