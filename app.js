@@ -10,18 +10,18 @@ const bcrypt = require('bcryptjs');
 
 const app = express();
 
-new window.JustValidate('.zipcode', {
-    Rules: {
-      zip: {
-        required: true,
-        zip: true
-      },
-    },
-    Messages: {
-      required: 'The field is required',
-    },
-    colorWrong: "#B81111"
-});
+// new window.JustValidate('.zipcode', {
+//     Rules: {
+//       zip: {
+//         required: true,
+//         zip: true
+//       },
+//     },
+//     Messages: {
+//       required: 'The field is required',
+//     },
+//     colorWrong: "#B81111"
+// });
 
 // enable sessions
 const session = require('express-session');
