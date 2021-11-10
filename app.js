@@ -78,6 +78,18 @@ app.get("/logout", function(req, res) {
     });
 });
 
+app.post('/delete', (req, res) => {
+  Outfit.deleteOne({ _id: req.outfitID }, function(err, outfit) {
+      if (err){
+        console.log(err); 
+        return res.send('an error occurred, please see the server logs for more information');
+      }
+      else {
+        return res.render('index', {'user': outfit.user.username, 'outfits': outfit.user.outfits});
+      }
+  });
+});
+
 app.post('/login', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
       if (!err && user) {
@@ -86,7 +98,13 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          return res.redirect('/');
+                          if(user.outfits.length!= 0){
+                            return res.render('index', {'user': user.username, 'outfits': user.outfits});
+                          }
+                          else{
+                            return res.redirect('/');
+                          }
+                          
                       } 
                       else {
                           console.log(err); 
