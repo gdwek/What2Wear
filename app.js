@@ -73,7 +73,7 @@ app.get('/create', (req, res) => {
 
 app.get("/logout", function(req, res) {
     req.session.destroy(() => {
-     req.logout();
+     delete req.user 
      res.redirect("/"); //Inside a callback… bulletproof!
     });
 });
