@@ -5,7 +5,7 @@
 
 Ever find yourself opening the weather app, seeing "60 degrees and windy" and thinking, "Okay, but what the heck do I wear?" What2Wear is for you! 
 
-What2Wear is a web app that will allow users to record what they have worn in the past for certain temperatures. Users can register and login. Once they're logged in, they can enter their location, and they will be told the current weather and what they wore when it was this weather in the past. If the user hasn't logged anything for that temperature range, they will be provided with a reccomendation of what to wear and prompted to log what they actually end up wearing that day for future purposes.
+What2Wear is a web app that will allow users to record what they have worn in the past for certain temperatures. Users can register and login. Once they're logged in, they will be told the current weather and what they wore when it was this weather in the past. If the user hasn't logged anything for that temperature range, they will be provided with a reccomendation of what to wear and the option what they actually end up wearing that day for future purposes, or to change their location.
 
 
 ## Data Model
@@ -93,28 +93,34 @@ An Example Outfit:
 
 (___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+* (1 point) Accuweather Locations API
+    * I'm going to be using this to get a location key for another Accuweather API
+    * This will allow me to provide the correctly formatted info for next step in process
+    * see references #1
+* (1 point) Accuweather Current Conditions API
+    * I'm going to be using the location key from the Locations API to get the temperature from this API
+    * This will allow me to provide the accurate weather for the user's location
+    * see references #2
+* (3 points) Client side form validation using Javascript library Just-validate 
+    * if any fields are left blank in the outfit creation, an error message will appear in the dom
+    * this will allow me to make sure the user enters the correct information
+    * if field left blank in the zipcode entry, an error message will appear in the dom
+    * if fields are left blank when logging in/signing up, error message will appear in the dom
+    * see references #3
+* (3 points) Unit Testing with Mocha
+    * will make unit tests for each page
+    * this will allow me to make sure my application is working as I go
+    * see references #4
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+8 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](app.js) 
 
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
-
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+1. [locations API](https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/postalcodes/search) - API documentation
+2. [current conditions API](https://developer.accuweather.com/accuweather-current-conditions-api/apis/get/currentconditions/v1/%7BlocationKey%7D) - API documentation
+3. [Just-validate](https://www.cssscript.com/custom-html5-form-validator-vanilla-javascript-just-validate/) - Javascript library Just-validate for client side form validation
+4. [mocha unit testing ](https://github.com/mochajs/mocha) - github repo for mocha unit testing
 
