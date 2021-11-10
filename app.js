@@ -78,6 +78,7 @@ app.get('/view', (req, res) => {
       return res.send('an error has occurred, please check the server output');
     }
     else{
+      console.log(user.outfits[0].top)
       res.render('view', {'outfits': user.outfits});
     }
   });
