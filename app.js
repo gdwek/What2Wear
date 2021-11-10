@@ -206,6 +206,19 @@ app.post('/create', (req, res) => {
         if (!err && user){
           console.log(req.body);
           //console.log(req.body.scarf_gloves);
+          if (req.body.jacket == 'yes'){
+            req.body.jacket = true;
+          }
+          else {
+            req.body.jacket = false;
+          }
+          if (req.body.scarf_gloves == 'yes'){
+            req.body.scarf_gloves = true;
+          }
+          else {
+            req.body.scarf_gloves = false;
+          }
+
           new Outfit({
             user: user,
             top: req.body.top,
