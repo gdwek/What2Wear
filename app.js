@@ -3,9 +3,10 @@ require('./db');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
 const uri = process.env.MONGODB_URI;
+mongoose.connect(uri);
 
 const app = express();
 

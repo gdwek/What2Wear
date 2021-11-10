@@ -29,5 +29,5 @@ const Outfit = new mongoose.Schema({
 
 mongoose.model('User', User);
 mongoose.model('Outfit', Outfit);
-mongoose.connect('mongodb://localhost/fp');
+mongoose.connect('mongodb://localhost/myFirstDatabase');
 
