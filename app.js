@@ -72,6 +72,7 @@ app.get('/manage', (req, res) => {
 });
 
 app.get('/view', (req, res) => {
+  console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
     if(err){
       console.log('error');
