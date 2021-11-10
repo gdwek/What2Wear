@@ -236,7 +236,7 @@ app.post('/create', (req, res) => {
                 user.outfits.push(outfit);
             }
             user.save();
-            res.render('index', {'user': user.username, 'user.outfits': user.outfits});
+            res.render('index', {'user': user.username, 'outfits': user.outfits});
         });
 
         }

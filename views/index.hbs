@@ -2,9 +2,9 @@
 {{#if user}}
 <span class="success">Currently logged in as: {{user}}</span>
 <a href="create">Enter an Outfit</a> or  <a href="zipcode">Change Location</a> or <a href="logout">Log Out</a>. 
-{{#if user.outfits}}
+{{#if outfits}}
 <ul>
-{{#each user.outfits}}
+{{#each outfits}}
 	<li>{{this}}</li>
 {{/each}}
 </ul>
