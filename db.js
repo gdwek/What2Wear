@@ -29,5 +29,5 @@ const Outfit = new mongoose.Schema({
 
 mongoose.model('User', User);
 mongoose.model('Outfit', Outfit);
-mongoose.connect('mongodb+srv://gdwek:superG415@cluster0.mmte2.mongodb.net/fp?retryWrites=true&w=majority');
+
 

@@ -5,9 +5,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
-//const uri = process.env.MONGODB_URI;
-
-
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri || 'mongodb://localhost:27017/TodoApp', { useNewUrlParser: true })
+.then(connect => console.log('connected to mongodb..'))
+.catch(e => console.log('could not connect to mongodb', e))
 const app = express();
 
 // new window.JustValidate('.zipcode', {
