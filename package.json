@@ -10,6 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/nyu-csci-ua-0467-001-fall-2021/gdwek-final-project.git"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "Gabrielle Dwek",
   "license": "ISC",
   "bugs": {
@@ -27,7 +31,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "hbs": "^4.1.2",
-    "just-validate": "^1.5.0"
+    "just-validate": "^1.5.0",
+    "mongoose": "^6.0.12"
   },
   "engines": {
     "node": "14.15.5"
