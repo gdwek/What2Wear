@@ -1,8 +1,8 @@
 <h1>Outfits</h1>
 {{#if outfits}}
 <ul>
-{{#each outfits as |o|}}
-	<li>ID: {{_id}}Top: {{_id.top}}Bottom: {{this.bottom}}Jacket: {{this.jacket}}Scarf or Gloves: {{this.scarf_gloves}}temperature: {{this.temp}}</li>
+{{#each outfits}
+	<li> ID: {{_id}} Top: {{top}} Bottom: {{bottom}} Jacket: {{jacket}} Scarf or Gloves: {{scarf_gloves}} Temperature: {{temp}}</li>
 {{/each}}
 </ul>
 {{/if}}
