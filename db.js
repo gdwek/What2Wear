@@ -30,7 +30,7 @@ const Outfit = new mongoose.Schema({
 
 mongoose.model('User', User);
 mongoose.model('Outfit', Outfit);
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connected to the DB')).catch(err => console.error('Error while connecting to DB', err));
+//const uri = process.env.MONGODB_URI;
+//mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connected to the DB')).catch(err => console.error('Error while connecting to DB', err));
 
 
