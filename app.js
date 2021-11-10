@@ -236,7 +236,7 @@ app.post('/create', (req, res) => {
                 user.outfits.push(outfit);
             }
             user.save();
-            res.redirect('/');
+            res.render('/', {user: user});
         });
 
         }
