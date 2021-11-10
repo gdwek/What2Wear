@@ -71,6 +71,13 @@ app.get('/create', (req, res) => {
   res.render('create');
   });
 
+app.get("/logout", function(req, res) {
+    req.session.destroy(() => {
+     req.logout();
+     res.redirect("/"); //Inside a callback… bulletproof!
+    });
+});
+
 app.post('/login', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
       if (!err && user) {
