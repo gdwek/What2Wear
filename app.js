@@ -88,12 +88,17 @@ app.get('/view', (req, res) => {
           else if (outfit){
             outfits.push(outfit);
           }
-        })
-      })
+          else {
+            console.log('no outfits');
+          }
+        });
+      });
       res.render('view', {'outfits': outfits});
     }
   });
 });
+
+
 
 app.get("/logout", function(req, res) {
     req.session.destroy(() => {
@@ -278,7 +283,7 @@ app.post('/create', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-  Outfit.deleteOne({ _id: req.outfitID }, function(err) {
+  Outfit.deleteOne({ _id: req.body.outfitID }, function(err) {
       if (err){
         console.log(err); 
         return res.send('an error occurred, please see the server logs for more information');
