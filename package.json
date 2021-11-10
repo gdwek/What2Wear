@@ -28,5 +28,8 @@
     "express-session": "^1.17.2",
     "hbs": "^4.1.2",
     "just-validate": "^1.5.0"
+  },
+  "engines": {
+    "node": "14.15.5"
   }
 }
