@@ -78,8 +78,19 @@ app.get('/view', (req, res) => {
       return res.send('an error has occurred, please check the server output');
     }
     else{
-      console.log(user.outfits[0].top)
-      res.render('view', {'outfits': user.outfits});
+      var outfits;
+      user.outfits.forEach((value, array) => {
+        Outfit.findOne({_id: value}, (err, outfit) => {
+          if(err){
+            console.log('error');
+            return res.send('an error has occurred, please check the server output');
+          }
+          else if (outfit){
+            outfits.push(outfit);
+          }
+        })
+      })
+      res.render('view', {'outfits': outfits});
     }
   });
 });
