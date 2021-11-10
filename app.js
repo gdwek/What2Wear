@@ -226,25 +226,17 @@ app.post('/create', (req, res) => {
             jacket: req.body.jacket,
             scarf_gloves: req.body.scarf_gloves,
             temp: 67
-        }).save(function(err, user) {
+        }).save(function(err, outfit) {
             if(err){
                 console.log(err);
                 return res.send('an error has occurred, please check the server output');
             }
             //redirect
             else{
-                req.session.regenerate((err) => {
-                    if (!err) {
-                        req.session.username = user.username; 
-                        return res.redirect('/');
-                    } 
-                    else {
-                        console.log('error'); 
-                        return res.send('an error occurred, please see the server logs for more information');
-                    }
-                });
+                user.outfits.push(outfit);
             }
         });
+
         }
         else if (err){
           console.log('error');
