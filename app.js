@@ -80,7 +80,7 @@ app.get('/view', (req, res) => {
     }
     else if (user){
       console.log('here i am');
-      var outfits = [];
+      const outfits_local = [];
       user.outfits.forEach((value, array) => {
         Outfit.findOne({_id: value}, (err, outfit) => {
           if(err){
@@ -88,14 +88,14 @@ app.get('/view', (req, res) => {
             return res.send('an error has occurred, please check the server output');
           }
           else if (outfit){
-            outfits.push(outfit);
+            outfits_local.push(outfit);
           }
           else {
             console.log('no outfits');
           }
         });
       });
-      res.render('view', {'outfits': outfits});
+      res.render('view', {'outfits': outfits_local});
     }
     else {
       return res.render('error', {'message' : 'user does not exist'});
