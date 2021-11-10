@@ -2,11 +2,63 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title></title>
-<link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<title>What2Wear</title>
 </head>
 <body>
-	<h1>What2Wear</h1>
+<style>
+body {
+	font-family: sans-serif;
+	height: 100vh;
+	font-family: Garamond, sans-serif;
+	font-size: 1em;
+	background-color: lightblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#outer {
+	width: 300px;
+	padding: 0em 2em 1em 2em;
+	background-color:mintcream;
+}
+
+.heading {
+	position: fixed;
+	top: 10%;
+	left: 36%;
+	font-size: 5em;
+	color: darkslategray; 
+	padding-top: 1em;	
+}
+
+.note {
+	color: darkolivegreen; 
+	padding-top: 1em;
+}
+
+.error {
+	background-color: #eecccc;
+	padding: 0.25em;
+}
+
+.success {
+	background-color: #cceecc;
+	padding: 0.25em;
+}
+
+form div {
+	padding-bottom: 0.5em;
+}
+</style>
+<div class="heading"> What2Wear </div>
+<div id="outer">
 {{{ body }}}
+
+{{#if home}}
+{{else}}
+<div class="note">Want go <a href="/">back home</a>?</div>
+{{/if}}
+</div>
+
 </body>
 </html>

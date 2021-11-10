@@ -1,1 +1,12 @@
-What2Wear Homepage
+<h1>What2Wear Homepage</h1>
+{{#if user}}
+<span class="success">Currently logged in as: {{user}}</span>
+<a href="create">Enter an Outfit</a> or  <a href="zipcode">Change Location</a>.
+{{else}}
+<span class="error">Not logged in</span>. <a href="signup">Sign Up</a> or <a href="login">login</a>.
+
+
+{{/if}}
+
+
+

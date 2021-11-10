@@ -1,3 +1,39 @@
 body {
 	font-family: sans-serif;
+	height: 100vh;
+	font-family: Garamond, sans-serif;
+	font-size: 1em;
+	background-color: lightblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#outer {
+	width: 300px;
+	padding: 0em 2em 1em 2em;
+	background-color:mintcream;
+}
+
+h1{
+	color: darkslategray; 
+	padding-top: 1em;	
+}
+
+.note {
+	color: darkolivegreen; 
+	padding-top: 1em;
+}
+
+.error {
+	background-color: #eecccc;
+	padding: 0.25em;
+}
+
+.success {
+	background-color: #cceecc;
+	padding: 0.25em;
+}
+
+form div {
+	padding-bottom: 0.5em;
 }
