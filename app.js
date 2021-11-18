@@ -85,7 +85,7 @@ app.get('/view', (req, res) => {
   // console.log('hi');
   // console.log(req.session.username);
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
-    console.log(outfits)
+    console.log(outfits.outfits)
     res.render('view', {'outfits': outfits});
   }) 
   // User.findOne({username: req.session.username}, (err, user) => {
