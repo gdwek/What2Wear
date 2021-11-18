@@ -91,7 +91,7 @@ app.get('/view', (req, res) => {
     else if (user){
       console.log('here i am');
       user.populate('outfits').exec(function(err, outfits) {
-        res.render('view', {outfits: outfits_local});
+        res.render('view', {outfits: outfits});
       }) 
 
       }
