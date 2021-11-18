@@ -71,11 +71,8 @@ app.get('/manage', (req, res) => {
   res.render('manage');
 });
 
-app.get('/view', (req, res) => {
-  res.render('view');
-});
 
-app.post('/view', (req, res) => {
+app.get('/view', (req, res) => {
   console.log('hi');
   console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
@@ -100,7 +97,7 @@ app.post('/view', (req, res) => {
           }
         });
       });
-      res.render('view', {'outfits': outfits_local});
+      res.render('view', {outfits: outfits_local});
     }
     else if (!err && !user){
       console.log('hi');
