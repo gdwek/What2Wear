@@ -91,6 +91,7 @@ app.get('/view', (req, res) => {
           }
           else if (outfit){
             outfits_local.push(outfit);
+            console.log('[ushed outfit')
           }
           else {
             console.log('no outfits');
