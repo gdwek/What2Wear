@@ -83,43 +83,46 @@ app.get('/manage', (req, res) => {
 app.get('/view', (req, res) => {
   console.log('hi');
   console.log(req.session.username);
-  User.findOne({username: req.session.username}, (err, user) => {
-    if(err){
-      console.log('error');
-      return res.send('an error has occurred, please check the server output');
-    }
-    else if (user){
-      console.log('here i am');
-      user.populate('outfits').exec(function(err, outfits) {
-        res.render('view', {outfits: outfits});
-      }) 
+  User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
+    res.render('view', {'outfits': outfits});
+  }) 
+  // User.findOne({username: req.session.username}, (err, user) => {
+  //   if(err){
+  //     console.log('error');
+  //     return res.send('an error has occurred, please check the server output');
+  //   }
+  //   else if (user){
+  //     console.log('here i am');
+  //     user.populate('outfits').exec(function(err, outfits) {
+  //       res.render('view', {outfits: outfits});
+  //     }) 
 
-      }
-    //   const outfits_local = [];
-    //   user.outfits.forEach((value, array) => {
-    //     Outfit.findOne({_id: value}, (err, outfit) => {
-    //       if(err){
-    //         console.log('error');
-    //         return res.send('an error has occurred, please check the server output');
-    //       }
-    //       else if (outfit){
-    //         outfits_local.push(outfit);
-    //         console.log('[ushed outfit')
-    //       }
-    //       else {
-    //         console.log('no outfits');
-    //       }
-    //     });
-    //   });
-    //   res.render('view', {outfits: outfits_local});
+  //     }
+  //   //   const outfits_local = [];
+  //   //   user.outfits.forEach((value, array) => {
+  //   //     Outfit.findOne({_id: value}, (err, outfit) => {
+  //   //       if(err){
+  //   //         console.log('error');
+  //   //         return res.send('an error has occurred, please check the server output');
+  //   //       }
+  //   //       else if (outfit){
+  //   //         outfits_local.push(outfit);
+  //   //         console.log('[ushed outfit')
+  //   //       }
+  //   //       else {
+  //   //         console.log('no outfits');
+  //   //       }
+  //   //     });
+  //   //   });
+  //   //   res.render('view', {outfits: outfits_local});
+  //   // }
+  //   // else if (!err && !user){
+  //   //   console.log('hi');
+  //   // }
+    // else {
+    //   return res.render('error', {'message' : 'user does not exist'});
     // }
-    // else if (!err && !user){
-    //   console.log('hi');
-    // }
-    else {
-      return res.render('error', {'message' : 'user does not exist'});
-    }
-  });
+  //});
 });
 
 
