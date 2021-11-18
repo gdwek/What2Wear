@@ -68,11 +68,14 @@ app.get('/changedZipcode', (req, res) => {
 });
 
 app.get('/manage', (req, res) => {
-  console.log('hi');
   res.render('manage');
 });
 
 app.get('/view', (req, res) => {
+  res.render('view');
+});
+
+app.post('/view', (req, res) => {
   console.log('hi');
   console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
