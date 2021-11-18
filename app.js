@@ -72,6 +72,7 @@ app.get('/manage', (req, res) => {
 });
 
 app.get('/view', (req, res) => {
+  console.log('hi');
   console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
     if(err){
@@ -96,6 +97,9 @@ app.get('/view', (req, res) => {
         });
       });
       res.render('view', {'outfits': outfits_local});
+    }
+    else if (!err && !user){
+      console.log('hi');
     }
     else {
       return res.render('error', {'message' : 'user does not exist'});
