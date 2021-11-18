@@ -26,7 +26,7 @@ mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connecte
 // });
 
 // enable sessions
-console.log(process.env.MONGODB_URI);
+
 const session = require('express-session');
 const sessionOptions = {
     secret: 'secret cookie thang (store this elsewhere!)',
@@ -82,8 +82,8 @@ app.get('/manage', (req, res) => {
 
 
 app.get('/view', (req, res) => {
-  console.log('hi');
-  console.log(req.session.username);
+  // console.log('hi');
+  // console.log(req.session.username);
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     res.render('view', {'outfits': outfits});
   }) 
