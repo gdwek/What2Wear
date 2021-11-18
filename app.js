@@ -68,6 +68,7 @@ app.get('/changedZipcode', (req, res) => {
 });
 
 app.get('/manage', (req, res) => {
+  console.log('hi');
   res.render('manage');
 });
 
