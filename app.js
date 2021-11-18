@@ -26,7 +26,7 @@ mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connecte
 // });
 
 // enable sessions
-console.log(uri);
+console.log(process.env.MONGODB_URI);
 const session = require('express-session');
 const sessionOptions = {
     secret: 'secret cookie thang (store this elsewhere!)',
