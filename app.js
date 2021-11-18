@@ -49,8 +49,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  // const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search" + apiId + "&client_secret=" + apiSecret;
-  // request(weatherURL, function(error, response, body){
+  const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search"
+  request(weatherURL, function(error, response, body){
   // let weather_json = JSON.parse(body);
   // const weather = {
   //     forecast : weather_json.response[0].periods[0].weather,
