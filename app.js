@@ -48,6 +48,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
+  // const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search" + apiId + "&client_secret=" + apiSecret;
+  // request(weatherURL, function(error, response, body){
+  // let weather_json = JSON.parse(body);
+  // const weather = {
+  //     forecast : weather_json.response[0].periods[0].weather,
+  //     temp: weather_json.response[0].periods[0].feelslikeF,
+  //     icon : weather_json.response[0].periods[0].icon
+  //   };
   res.render('index', {user: req.session.username, home: true});
 });
 
@@ -82,27 +90,32 @@ app.get('/view', (req, res) => {
     }
     else if (user){
       console.log('here i am');
-      const outfits_local = [];
-      user.outfits.forEach((value, array) => {
-        Outfit.findOne({_id: value}, (err, outfit) => {
-          if(err){
-            console.log('error');
-            return res.send('an error has occurred, please check the server output');
-          }
-          else if (outfit){
-            outfits_local.push(outfit);
-            console.log('[ushed outfit')
-          }
-          else {
-            console.log('no outfits');
-          }
-        });
-      });
-      res.render('view', {outfits: outfits_local});
-    }
-    else if (!err && !user){
-      console.log('hi');
-    }
+      user.populate('outfits').exec(function(err, outfits) {
+        res.render('view', {outfits: outfits_local});
+      }) 
+
+      }
+    //   const outfits_local = [];
+    //   user.outfits.forEach((value, array) => {
+    //     Outfit.findOne({_id: value}, (err, outfit) => {
+    //       if(err){
+    //         console.log('error');
+    //         return res.send('an error has occurred, please check the server output');
+    //       }
+    //       else if (outfit){
+    //         outfits_local.push(outfit);
+    //         console.log('[ushed outfit')
+    //       }
+    //       else {
+    //         console.log('no outfits');
+    //       }
+    //     });
+    //   });
+    //   res.render('view', {outfits: outfits_local});
+    // }
+    // else if (!err && !user){
+    //   console.log('hi');
+    // }
     else {
       return res.render('error', {'message' : 'user does not exist'});
     }
