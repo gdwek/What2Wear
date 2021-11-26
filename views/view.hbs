@@ -1,10 +1,10 @@
 <h1>Outfits</h1>
 {{#if outfits}}
 <ul>
-{{#each outfits}}
 	<ol type="1">
-		<li> Top: {{this.top}} Bottom: {{this.bottom}} Jacket: {{this.jacket}} Scarf or Gloves: {{this.scarf_gloves}} Temperature: {{this.temp}}</li>
+		{{#each outfits}}
+			<li> Top: {{this.top}} Bottom: {{this.bottom}} Jacket: {{this.jacket}} Scarf or Gloves: {{this.scarf_gloves}} Temperature: {{this.temp}}</li>
+		{{/each}}
 	</ol>
-{{/each}}
 </ul>
 {{/if}}
