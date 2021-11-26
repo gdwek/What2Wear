@@ -25,7 +25,8 @@ const Outfit = new mongoose.Schema({
     bottom: {type: String, required: true},
     jacket: {type: Boolean, required: true},
     scarf_gloves: {type: Boolean, required: true},
-    temp: {type: Number, required: true}
+    temp: {type: Number, required: true},
+    //index: {type: Number, required: false}
 });
 
 mongoose.model('User', User);
