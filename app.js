@@ -308,7 +308,7 @@ app.post('/create', (req, res) => {
           else {
             req.body.scarf_gloves = false;
           }
-        apiRetrieval(user, req, newOutfitWeather);
+        apiRetrieval(user, req, res, newOutfitWeather);
         }
         else if (err){
           console.log('error');
