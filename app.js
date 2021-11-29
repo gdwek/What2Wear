@@ -130,7 +130,7 @@ app.get("/logout", function(req, res) {
     });
 });
 
-function apiRetrieval(user, req, callback){
+function apiRetrieval(user, req, res, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
             let weather_json = JSON.parse(body);
@@ -139,12 +139,12 @@ function apiRetrieval(user, req, callback){
             request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
-              callback(temperature, user, req);
+              callback(temperature, user, req, res);
             }); 
       });
 };
 
-function newOutfitWeather (temperature, user, req){
+function newOutfitWeather (temperature, user, req, res){
       new Outfit({
         user: user,
         top: req.body.top,
