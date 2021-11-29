@@ -149,7 +149,7 @@ app.post('/login', (req, res) => {
                           req.session.username = user.username; 
                           const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
                           console.log(weatherURL);
-                          app.request(weatherURL, function(error, response, body){
+                          app.get(weatherURL, function(error, response, body){
                                 let weather_json = JSON.parse(body);
                                 const weather =  weather_json.Key;
                                 console.log(weather);
