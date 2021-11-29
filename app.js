@@ -129,7 +129,8 @@ app.get("/logout", function(req, res) {
 });
 
 // function apiRetrieval((url, ){
-//    const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + req.session.zipcode;
+//    const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
+
 //   request(weatherURL, function(error, response, body){
 //      let weather_json = JSON.parse(body);
 //     const weather =  weather_json.Key;
@@ -146,7 +147,8 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          console.log(user.zipcode);
+                          const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
+                          console.log(weatherURL);
                           return res.redirect('/');
                       } 
                       else {
