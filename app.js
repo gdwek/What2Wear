@@ -153,6 +153,7 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
+                          console.log(apiRetrieval(user));
                           return res.redirect('/');
                       } 
                       else {
@@ -294,7 +295,7 @@ app.post('/create', (req, res) => {
             bottom: req.body.bottom,
             jacket: req.body.jacket,
             scarf_gloves: req.body.scarf_gloves,
-            temp: apiRetrieval(user)
+            temp: 67
         }).save(function(err, outfit) {
             if(err){
                 console.log(err);
