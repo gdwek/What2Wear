@@ -130,15 +130,19 @@ app.get("/logout", function(req, res) {
     });
 });
 
-// function apiRetrieval((url, ){
-//    const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
-
-//   request(weatherURL, function(error, response, body){
-//      let weather_json = JSON.parse(body);
-//     const weather =  weather_json.Key;
-//     console.log(weather);
-//    });
-// })
+function apiRetrieval(user){
+      const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
+      request(locationsURL, function(error, response, body) {
+            let weather_json = JSON.parse(body);
+            const key =  weather_json[0].Key;
+            const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
+            return request(weatherURL, function(error, response, body) {
+              let weather_json = JSON.parse(body);
+              const temperature =  weather_json[0].Temperature.Imperial.Value;
+              return temperature;
+            });
+      });
+};
 
 
 app.post('/login', (req, res) => {
@@ -149,18 +153,6 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
-                          console.log(locationsURL);
-                          request(locationsURL, function(error, response, body) {
-                                let weather_json = JSON.parse(body);
-                                const key =  weather_json[0].Key;
-                                const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
-                                request(weatherURL, function(error, response, body) {
-                                  let weather_json = JSON.parse(body);
-                                  const temperature =  weather_json[0].Temperature.Imperial.Value;
-                                  console.log(temperature);
-                            });
-                          });
                           return res.redirect('/');
                       } 
                       else {
@@ -302,7 +294,7 @@ app.post('/create', (req, res) => {
             bottom: req.body.bottom,
             jacket: req.body.jacket,
             scarf_gloves: req.body.scarf_gloves,
-            temp: 67
+            temp: apiRetrieval(user)
         }).save(function(err, outfit) {
             if(err){
                 console.log(err);
