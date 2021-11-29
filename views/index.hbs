@@ -1,5 +1,6 @@
 <h1>What2Wear Homepage</h1>
 {{#if user}}
+<span class="weather">It's {{temperature}}°F Today!</span>
 <span class="success">Currently logged in as: {{user}}</span>
 <a href="manage">Manage Outfits</a> or  <a href="zipcode">Change Location</a> or <a href="logout">Log Out</a> or <a href="view">View Outfits</a>. 
 {{else}}

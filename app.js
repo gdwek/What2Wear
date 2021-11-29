@@ -51,7 +51,23 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.render('index', {user: req.session.username, home: true});
+  if(req.session.username){
+    User.findOne({username: req.session.username}, (err, user) => {
+        if (!err && user){
+          res.render('index', {user: req.session.username, temperature: apiRetrieval(user, req, res, renderWeather), home: true});
+        }
+        else if (err){
+          console.log('error');
+          return res.send('an error has occurred, please check the server output');
+        }
+        else {
+          return res.render('error', {'message' : 'user does not exist'});
+        }
+    });
+  }
+  else {
+    res.render('index', {home: true});
+  } 
 });
 
 app.get('/login', (req, res) => {
@@ -144,6 +160,9 @@ function apiRetrieval(user, req, res, callback){
       });
 };
 
+function renderWeather(temperature, user, req, res){
+  return temperature;
+}
 function newOutfitWeather (temperature, user, req, res){
       new Outfit({
         user: user,
