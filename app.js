@@ -130,7 +130,7 @@ app.get("/logout", function(req, res) {
     });
 });
 
-function apiRetrieval(user, callback){
+function apiRetrieval(user, req, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
             let weather_json = JSON.parse(body);
@@ -139,12 +139,12 @@ function apiRetrieval(user, callback){
             request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
-              callback(temperature);
+              callback(temperature, user, req);
             }); 
       });
 };
 
-function newOutfitWeather (temperature){
+function newOutfitWeather (temperature, user, req){
       new Outfit({
         user: user,
         top: req.body.top,
@@ -308,7 +308,7 @@ app.post('/create', (req, res) => {
           else {
             req.body.scarf_gloves = false;
           }
-        apiRetrieval(user, newOutfitWeather);
+        apiRetrieval(user, req, newOutfitWeather);
         }
         else if (err){
           console.log('error');
