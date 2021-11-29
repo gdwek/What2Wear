@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
   if(req.session.username){
     User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
-          res.render('index', {user: req.session.username, temperature: apiRetrieval(user, req, res, renderWeather), home: true});
+          apiRetrieval(user, req, res, renderWeather);
         }
         else if (err){
           console.log('error');
@@ -161,7 +161,7 @@ function apiRetrieval(user, req, res, callback){
 };
 
 function renderWeather(temperature, user, req, res){
-  return temperature;
+  res.render('index', {user: user.username, temperature: temperature, home: true});
 }
 function newOutfitWeather (temperature, user, req, res){
       new Outfit({
