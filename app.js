@@ -132,15 +132,15 @@ app.get("/logout", function(req, res) {
 
 function apiRetrieval(user){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
-      request(locationsURL, function(error, response, body) {
+      return request(locationsURL, function(error, response, body) {
             let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
-            request(weatherURL, function(error, response, body) {
+            return request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
               return temperature;
-            });
+            }); 
       });
 };
 
