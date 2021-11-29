@@ -130,20 +130,41 @@ app.get("/logout", function(req, res) {
     });
 });
 
-function apiRetrieval(user){
+function apiRetrieval(user, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
-      return request(locationsURL, function(error, response, body) {
+      request(locationsURL, function(error, response, body) {
             let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
-            return request(weatherURL, function(error, response, body) {
+            request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
-              return temperature;
+              callback(temperature);
             }); 
       });
 };
 
+function newOutfitWeather (temperature){
+      new Outfit({
+        user: user,
+        top: req.body.top,
+        bottom: req.body.bottom,
+        jacket: req.body.jacket,
+        scarf_gloves: req.body.scarf_gloves,
+        temp: temperature
+    }).save(function(err, outfit) {
+        if(err){
+            console.log(err);
+            return res.send('an error has occurred, please check the server output');
+        }
+        //redirect
+        else{
+            user.outfits.push(outfit);
+        }
+        user.save();
+        res.redirect('/');
+    });
+};
 
 app.post('/login', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
@@ -153,7 +174,6 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          console.log(apiRetrieval(user));
                           return res.redirect('/');
                       } 
                       else {
@@ -288,27 +308,7 @@ app.post('/create', (req, res) => {
           else {
             req.body.scarf_gloves = false;
           }
-
-          new Outfit({
-            user: user,
-            top: req.body.top,
-            bottom: req.body.bottom,
-            jacket: req.body.jacket,
-            scarf_gloves: req.body.scarf_gloves,
-            temp: 67
-        }).save(function(err, outfit) {
-            if(err){
-                console.log(err);
-                return res.send('an error has occurred, please check the server output');
-            }
-            //redirect
-            else{
-                user.outfits.push(outfit);
-            }
-            user.save();
-            res.redirect('/');
-        });
-
+        apiRetrieval(user, newOutfitWeather);
         }
         else if (err){
           console.log('error');
