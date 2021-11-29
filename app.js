@@ -4,6 +4,7 @@ require('dotenv').config();
 
 
 const express = require('express');
+const request = require("request");
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -44,6 +45,7 @@ const Outfit = mongoose.model('Outfit');
 
 // body parser setup
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -149,7 +151,7 @@ app.post('/login', (req, res) => {
                           req.session.username = user.username; 
                           const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
                           console.log(weatherURL);
-                          app.get(weatherURL, (req, res)  => {
+                          request(weatherURL, function(error, response, body) {
                                 console.log(req.body);
                                 let weather_json = JSON.parse(req.body);
                                 const weather =  weather_json.Key;
