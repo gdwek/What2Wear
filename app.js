@@ -49,12 +49,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  // const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + req.session.zipcode;
-  // request(weatherURL, function(error, response, body){
-  //    let weather_json = JSON.parse(body);
-  // //   const weather =  weather_json.Key;
-  // //   console.log(weather);
-  //  });
   res.render('index', {user: req.session.username, home: true});
 });
 
@@ -83,7 +77,7 @@ app.get('/view', (req, res) => {
   // console.log('hi');
   // console.log(req.session.username);
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
-    console.log(outfits.outfits)
+    //console.log(outfits.outfits)
     res.render('view', {'outfits': outfits.outfits});
   }) 
   // User.findOne({username: req.session.username}, (err, user) => {
@@ -134,7 +128,14 @@ app.get("/logout", function(req, res) {
     });
 });
 
-
+// function apiRetrieval((url, ){
+//    const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + req.session.zipcode;
+//   request(weatherURL, function(error, response, body){
+//      let weather_json = JSON.parse(body);
+//     const weather =  weather_json.Key;
+//     console.log(weather);
+//    });
+// })
 
 
 app.post('/login', (req, res) => {
@@ -145,6 +146,7 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
+                          console.log(req.session.zipcode);
                           return res.redirect('/');
                       } 
                       else {
@@ -258,6 +260,8 @@ app.post('/zipcode', (req, res) => {
       }
   });
 });
+
+
 
 app.post('/create', (req, res) => {
   //console.log(req.session.username);
