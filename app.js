@@ -343,7 +343,7 @@ app.post('/delete', (req, res) => {
   Outfit.deleteOne({ _id: req.body.outfitID }, function(err) {
       if (err){
         console.log(err); 
-        return res.send('an error occurred, please see the server logs for more information');
+        return res.render('error', {'message' : 'invalid ID'});
       }
       else {
         return res.redirect("/");
