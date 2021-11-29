@@ -152,7 +152,7 @@ app.post('/login', (req, res) => {
                           app.get(weatherURL, function(error, response, body){
                                 let weather_json = JSON.parse(body);
                                 const weather =  weather_json.Key;
-                                console.log(weather);
+                                console.log(weather_json);
                           });
                           return res.redirect('/');
                       } 
