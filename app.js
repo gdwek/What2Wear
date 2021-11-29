@@ -149,12 +149,17 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          const weatherURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
-                          console.log(weatherURL);
-                          request(weatherURL, function(error, response, body) {
+                          const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
+                          console.log(locationsURL);
+                          request(locationsURL, function(error, response, body) {
                                 let weather_json = JSON.parse(body);
-                                const weather =  weather_json[0].Key;
-                                console.log(weather);
+                                const key =  weather_json[0].Key;
+                                const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
+                                request(weatherURL, function(error, response, body) {
+                                  let weather_json = JSON.parse(body);
+                                  const temperature =  weather_json[0].Temperature.Imperial.Value;
+                                  console.log(temperature);
+                            });
                           });
                           return res.redirect('/');
                       } 
