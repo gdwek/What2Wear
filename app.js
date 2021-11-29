@@ -146,7 +146,7 @@ app.post('/login', (req, res) => {
                   req.session.regenerate((err) => {
                       if (!err) {
                           req.session.username = user.username; 
-                          console.log(req.session.zipcode);
+                          console.log(user.zipcode);
                           return res.redirect('/');
                       } 
                       else {
