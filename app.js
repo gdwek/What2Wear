@@ -263,13 +263,13 @@ app.post('/login',
       //     });
       //   })(req, res, next);
       // }
-      else if (err){
-          console.log('error');
-          return res.send('an error has occurred, please check the server output');
-      }
-      else {
-          return res.render('error', {'message' : 'user does not exist'});
-      }
+      // else if (err){
+      //     console.log('error');
+      //     return res.send('an error has occurred, please check the server output');
+      // }
+      // else {
+      //     return res.render('error', {'message' : 'user does not exist'});
+      // }
 
 
   //         bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
