@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
   if(req.session.username){
     User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
-          apiRetrieval(user, req, res, renderWeather);
+          apiRetrieval(user, req, res, userOutfits);
         }
         else if (err){
           console.log('error');
@@ -92,11 +92,14 @@ app.get('/manage', (req, res) => {
 
 
 app.get('/view', (req, res) => {
-  // console.log('hi');
-  // console.log(req.session.username);
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
-    //console.log(outfits.outfits)
-    res.render('view', {'outfits': outfits.outfits});
+    if(outfits){
+      res.render('view', {'outfits': outfits.outfits});
+    }
+    else if (err){
+      console.log('error');
+      return res.send('an error has occurred, please check the server output');
+    }
   }) 
   // User.findOne({username: req.session.username}, (err, user) => {
   //   if(err){
@@ -160,9 +163,25 @@ function apiRetrieval(user, req, res, callback){
       });
 };
 
-function renderWeather(temperature, user, req, res){
-  res.render('index', {user: user.username, temperature: temperature, home: true});
-}
+function userOutfits(temperature, user, req, res) {
+  User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
+    if(outfits){
+      outfits_in_range = outfits.filter( outfit => outfit.temp >= temperature && outfit.temp <= temperature+5);
+      res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
+    }
+    else if (err){
+      console.log('error');
+      return res.send('an error has occurred, please check the server output');
+    }
+    else {
+      res.render('index', {user: user.username, temperature: temperature, home: true});
+    }
+  }) 
+};
+
+// function renderWeather(temperature, user, req, res){
+//   res.render('index', {user: user.username, temperature: temperature, home: true});
+// }
 function newOutfitWeather (temperature, user, req, res){
       new Outfit({
         user: user,
