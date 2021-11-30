@@ -207,14 +207,13 @@ function userOutfits(temperature, user, req, res) {
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
      // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
-     
-      
     }
     else if (err){
       console.log('error');
       return res.send('an error has occurred, please check the server output');
     }
     else {
+      console.log('hi');
       res.render('index', {user: user.username, temperature: temperature, home: true});
     }
   }) 
