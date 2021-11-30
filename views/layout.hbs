@@ -68,22 +68,21 @@ body {
 form div {
 	padding-bottom: 0.5em;
 }
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-  }
+
   .parent {
 	list-style-type: none;
 	padding: fit-content(300px);
 	display: grid;
 	grid-gap: 20px;
 	justify-content: center;
+	box-sizing: border-box;
 	grid-template-columns: fit-content(300px) fit-content(300px) 1fr;
 	{{!-- grid-template-columns: repeat(3, calc(33.33% - 20px)); --}}
+
   }
   .child {
 	color: white;
+	box-sizing: border-box;
 	padding: 10px;
 	background: teal;
 	margin: 0; /* because we have grid-gap */
