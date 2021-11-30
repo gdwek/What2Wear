@@ -7,10 +7,10 @@ const request = require("request");
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-//const connectEnsureLogin = require('connect-ensure-login'); 
-const flash = require('connect-flash');
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local');
+// //const connectEnsureLogin = require('connect-ensure-login'); 
+// const flash = require('connect-flash');
 const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
 const uri = process.env.MONGODB_URI;
@@ -236,73 +236,45 @@ function newOutfitWeather (temperature, user, req, res){
     });
 };
 
-app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);
-// app.post('/login', (req, res) => {
-//   User.findOne({username: req.body.username}, (err, user) => {
-//       if (!err && user) {
-        
-//       //   passport.authenticate('local', function(err, user, info) {
-//       //     if (err) { 
-//       //       console.log(err); 
-      //       return res.send('an error occurred, please see the server logs for more information');
-      //     }
-      //     if (!user) { 
-      //       return res.redirect('/login'); 
-      //     }
-      //     req.logIn(user, function(err) {
-      //       if (err) { 
-      //         console.log(err); 
-      //         return res.send('an error occurred, please see the server logs for more information');
-      //       }
-      //       req.session.username = user.username; 
-      //       return res.redirect('/');
-      //     });
-      //   })(req, res, next);
-      // }
-      // else if (err){
-      //     console.log('error');
-      //     return res.send('an error has occurred, please check the server output');
-      // }
-      // else {
-      //     return res.render('error', {'message' : 'user does not exist'});
-      // }
-
-
-  //         bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
-  //             if (passwordMatch){
-  //                 req.session.regenerate((err) => {
-  //                     if (!err) {
-  //                         req.session.username = user.username; 
-  //                         return res.redirect('/');
-  //                     } 
-  //                     else {
-  //                         console.log(err); 
-  //                         return res.send('an error occurred, please see the server logs for more information');
-  //                     }
-  //                 });
-  //             }
-  //             else if (!passwordMatch){
-  //                 return res.render('error', {'message' : 'user does not exist'});
-  //             }
-  //             else if (err){
-  //                 console.log('error');
-  //                 return res.send('an error has occurred, please check the server output');
-  //             }
-  //         });
-  //     }
-  //     else if (err){
-  //         console.log('error');
-  //         return res.send('an error has occurred, please check the server output');
-  //     }
-  //     else {
-  //         return res.render('error', {'message' : 'user does not exist'});
-  //     }
-//   });
-// });
+// app.post('/login',
+//   passport.authenticate('local', { successRedirect: '/',
+//                                    failureRedirect: '/login',
+//                                    failureFlash: true })
+// );
+app.post('/login', (req, res) => {
+  User.findOne({username: req.body.username}, (err, user) => {
+      if (!err && user) {
+          bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
+              if (passwordMatch){
+                  req.session.regenerate((err) => {
+                      if (!err) {
+                          req.session.username = user.username; 
+                          return res.redirect('/');
+                      } 
+                      else {
+                          console.log(err); 
+                          return res.send('an error occurred, please see the server logs for more information');
+                      }
+                  });
+              }
+              else if (!passwordMatch){
+                  return res.render('error', {'message' : 'user does not exist'});
+              }
+              else if (err){
+                  console.log('error');
+                  return res.send('an error has occurred, please check the server output');
+              }
+          });
+      }
+      else if (err){
+          console.log('error');
+          return res.send('an error has occurred, please check the server output');
+      }
+      else {
+          return res.render('error', {'message' : 'user does not exist'});
+      }
+  });
+});
 
 app.post('/signup', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {

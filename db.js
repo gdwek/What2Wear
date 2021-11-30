@@ -29,7 +29,7 @@ const Outfit = new mongoose.Schema({
     //index: {type: Number, required: false}
 });
 
-User.plugin(passportLocalMongoose);
+//User.plugin(passportLocalMongoose);
 
 mongoose.model('User', User);
 mongoose.model('Outfit', Outfit);
