@@ -68,9 +68,12 @@ body {
 form div {
 	padding-bottom: 0.5em;
 }
-#outfitgrid {
-  .parent {
+* {
+	padding: 0;
+	margin: 0;
 	box-sizing: border-box;
+  }
+  .parent {
 	list-style-type: none;
 	padding: fit-content(300px);
 	display: grid;
@@ -80,13 +83,11 @@ form div {
 	{{!-- grid-template-columns: repeat(3, calc(33.33% - 20px)); --}}
   }
   .child {
-	box-sizing: border-box;  
 	color: white;
 	padding: 10px;
 	background: teal;
 	margin: 0; /* because we have grid-gap */
   }
-}
 </style>
 <div class="heading"> What2Wear </div>
 <div id="outer">
