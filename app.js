@@ -193,7 +193,9 @@ function apiRetrieval(user, req, res, callback){
 function userOutfits(temperature, user, req, res) {
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     if(outfits){
+      console.log('im over here!!!!');
       const lastDigit = temperature%10;//9
+      console.log(lastDigit);
       if(lastDigit>= 0 && lastDigit<5){
         const compliment = 5-lastDigit;//-4
         const suppliment = 5-compliment;//9
@@ -201,6 +203,7 @@ function userOutfits(temperature, user, req, res) {
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
       else if (lastDigit>5 && lastDigit <= 9){
+        console.log('im here!!!!');
         const compliment = lastDigit-5;//4
         const suppliment = 5-compliment;//1
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-compliment && outfit.temp < temperature+suppliment);
