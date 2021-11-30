@@ -305,7 +305,7 @@ app.post('/login', (req, res) => {
   //     else {
   //         return res.render('error', {'message' : 'user does not exist'});
   //     }
-  // });
+  });
 });
 
 app.post('/signup', (req, res) => {
