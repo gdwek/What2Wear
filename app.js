@@ -197,6 +197,7 @@ function userOutfits(temperature, user, req, res) {
       const lastDigit = temperature%10;//9
       console.log(lastDigit);
       if(lastDigit>= 0 && lastDigit<5){
+        console.log("im here too")
         const compliment = 5-lastDigit;//-4
         const suppliment = 5-compliment;//9
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp < temperature+compliment);
