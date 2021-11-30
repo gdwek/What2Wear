@@ -1,18 +1,19 @@
 <h1>Outfits</h1>
 {{#if outfits}}
-<ul>
-		{{#each outfits}}
-			<li> Top: {{this.top}} 
-				 <br>
-				 Bottom: {{this.bottom}} 
-				 <br>
-				 Jacket: {{this.jacket}} 
-				 <br>
-				 Scarf or Gloves: {{this.scarf_gloves}} 
-				 <br>
-				 Temperature: {{this.temp}}
-				 <br>
-				 ID: {{this._id}}</li>
-		{{/each}}
-</ul>
+<ul class='parent'> 
+            {{#each outfits}}
+                <li class='child'> Top: {{this.top}} 
+                    <br>
+                    Bottom: {{this.bottom}} 
+                    <br>
+                    Jacket: {{this.jacket}} 
+                    <br>
+                    Scarf or Gloves: {{this.scarf_gloves}} 
+                    <br>
+                    Temperature: {{this.temp}}
+                    <br>
+                    ID: {{this._id}}</li>
+            {{/each}}
+    </ul>
+
 {{/if}}
