@@ -78,19 +78,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ));
 
 app.get('/', (req, res) => {
-  if(req.session.username){
-    User.findOne({username: req.session.username}, (err, user) => {
-        if (!err && user){
-          apiRetrieval(user, req, res, userOutfits);
-        }
-        else if (err){
-          console.log('error');
-          return res.send('an error has occurred, please check the server output');
-        }
-        else {
-          return res.render('error', {'message' : 'user does not exist'});
-        }
-    });
+  if(req.user){
+    //User.findOne({username: req.session.username}, (err, user) => {
+        //if (!err && user){
+          apiRetrieval(req.user, req, res, userOutfits);
+       // }
+        // else if (err){
+        //   console.log('error');
+        //   return res.send('an error has occurred, please check the server output');
+        // }
+        // else {
+        //   return res.render('error', {'message' : 'user does not exist'});
+        // }
+   // });
   }
   else {
     res.render('index', {home: true});
