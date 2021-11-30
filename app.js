@@ -167,7 +167,7 @@ function userOutfits(temperature, user, req, res) {
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     if(outfits){
       console.log(typeof outfits.outfits);
-      outfits_in_range = outfits.filter( outfit => outfit.temp >= temperature && outfit.temp <= temperature+5);
+      outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature && outfit.temp <= temperature+5);
       res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
     }
     else if (err){
