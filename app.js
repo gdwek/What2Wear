@@ -1,4 +1,3 @@
-
 require('./db');
 require('dotenv').config(); 
 
@@ -172,8 +171,6 @@ function userOutfits(temperature, user, req, res) {
      // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
      
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp <= temperature+compliment);
-      
-    
       res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
     }
     else if (err){

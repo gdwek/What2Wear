@@ -5,7 +5,14 @@
 <span class="outfits">In this weather, you've worn:</span>
     <ul class='parent'> 
             {{#each outfits}}
-                <li class='child'> Top: {{this.top}} 
+                <li class='child' data-aos="fade-up";
+    data-aos-offset="200";
+    data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false"
+    data-aos-anchor-placement="top-center"> Top: {{this.top}} 
                     <br>
                     Bottom: {{this.bottom}} 
                     <br>

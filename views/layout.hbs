@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+	 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <meta charset="utf-8">
 <title>What2Wear</title>
 </head>
@@ -86,17 +87,21 @@ form div {
 	padding: 10px;
 	background: teal;
 	margin: 0; /* because we have grid-gap */
+  >
   }
 </style>
 <div class="heading"> What2Wear </div>
 <div id="outer">
 {{{ body }}}
-
 {{#if home}}
 {{else}}
 <div class="note">Want go <a href="/">back home</a>?</div>
 {{/if}}
 </div>
+ <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 
 </body>
 </html>
