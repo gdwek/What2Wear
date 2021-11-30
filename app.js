@@ -276,6 +276,7 @@ app.post('/login', (req, res) => {
   });
 });
 
+
 app.post('/signup', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
       if (!err && user) {
