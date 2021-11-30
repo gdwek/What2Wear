@@ -199,7 +199,7 @@ function userOutfits(temperature, user, req, res) {
       if(lastDigit>= 0 && lastDigit<5){
         const compliment = 5-lastDigit;//-4
         const suppliment = 5-compliment;//9
-        outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp <= temperature+compliment);
+        outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp < temperature+compliment);
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
       else if (lastDigit>5 && lastDigit <= 9){
