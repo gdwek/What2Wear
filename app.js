@@ -171,7 +171,7 @@ function userOutfits(temperature, user, req, res) {
       const suppliment = 5-compliment;
      // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
      
-        outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= outfit.temp-suppliment && outfit.temp <= outfit.temp+compliment);
+        outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp <= temperature+compliment);
       
     
       res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
