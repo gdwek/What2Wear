@@ -301,8 +301,8 @@ app.post('/login',
   //     else {
   //         return res.render('error', {'message' : 'user does not exist'});
   //     }
-  });
-});
+//   });
+// });
 
 app.post('/signup', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
