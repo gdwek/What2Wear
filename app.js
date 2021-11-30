@@ -179,6 +179,9 @@ app.get("/logout", function(req, res) {
 function apiRetrieval(user, req, res, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
+            if(error){
+              return res.render('error', {'message' : 'invalid zipcode'});
+            }
             let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
@@ -218,7 +221,6 @@ function userOutfits(temperature, user, req, res) {
       return res.send('an error has occurred, please check the server output');
     }
     else {
-      console.log('hi');
       res.render('index', {user: user.username, temperature: temperature, home: true});
     }
   }) 
@@ -344,7 +346,7 @@ app.post('/zipcode', (req, res) => {
   User.findOne({username: req.session.username}, (err, user) => {
       if(!err && user){
           req.session.regenerate((err) => {
-              if (!err) {
+              if (!err )  {
                   req.session.username = user.username; 
                   req.session.zipcode = req.body.zipcode;
                   user.zipcode = req.body.zipcode;
