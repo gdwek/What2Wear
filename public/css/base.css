@@ -9,7 +9,6 @@ body {
 	align-items: center;
 }
 #outer {
-	position: absolute;
 	top: 80%;
 	width: 300px;
 	padding: 0em 2em 1em 2em;
