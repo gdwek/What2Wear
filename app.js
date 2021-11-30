@@ -166,8 +166,14 @@ function apiRetrieval(user, req, res, callback){
 function userOutfits(temperature, user, req, res) {
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     if(outfits){
-      console.log(typeof outfits.outfits);
-      outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature && outfit.temp <= temperature+5);
+      const lastDigit  = temperature%10;
+      const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
+      if (lastDigit  >= 0 && lastDigit<= 4){
+        outfits_in_range = lastDigits.filter( outfit => outfit.temp >= 0 && outfit.temp <= 4);
+      }
+      else {
+        outfits_in_range = lastDigits.filter( outfit => outfit.temp >= 5 && outfit.temp <= 9);
+      }
       res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
     }
     else if (err){
