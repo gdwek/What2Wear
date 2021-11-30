@@ -68,13 +68,9 @@ body {
 form div {
 	padding-bottom: 0.5em;
 }
-#outfitgrid{
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-  }
+#outfitgrid {
   .parent {
+	box-sizing: border-box;
 	list-style-type: none;
 	padding: fit-content(300px);
 	display: grid;
@@ -84,6 +80,7 @@ form div {
 	{{!-- grid-template-columns: repeat(3, calc(33.33% - 20px)); --}}
   }
   .child {
+	box-sizing: border-box;  
 	color: white;
 	padding: 10px;
 	background: teal;
