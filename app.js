@@ -50,12 +50,12 @@ const Outfit = mongoose.model('Outfit');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-app.use(flash());
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+// app.use(flash());
 
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
