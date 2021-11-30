@@ -9,6 +9,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const connectEnsureLogin = require('connect-ensure-login'); 
 const flash = require('connect-flash');
 const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
@@ -51,6 +52,9 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 
 // serve static files
@@ -72,16 +76,6 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
 
 app.get('/', (req, res) => {
   if(req.session.username){
@@ -242,16 +236,18 @@ function newOutfitWeather (temperature, user, req, res){
     });
 };
 
-app.post('/login', (req, res) => {
-  User.findOne({username: req.body.username}, (err, user) => {
-      if (!err && user) {
-        passport.authenticate('local', { successRedirect: '/',
-          failureRedirect: '/login',
-          failureFlash: true })
-      }
-      //   passport.authenticate('local', function(err, user, info) {
-      //     if (err) { 
-      //       console.log(err); 
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
+// app.post('/login', (req, res) => {
+//   User.findOne({username: req.body.username}, (err, user) => {
+//       if (!err && user) {
+        
+//       //   passport.authenticate('local', function(err, user, info) {
+//       //     if (err) { 
+//       //       console.log(err); 
       //       return res.send('an error occurred, please see the server logs for more information');
       //     }
       //     if (!user) { 

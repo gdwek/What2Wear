@@ -1,7 +1,7 @@
 //1st DRAFT DATA MODEL
 //require('dotenv').config(); 
 const mongoose = require('mongoose');
-
+const passportLocalMongoose = require('passport-local-mongoose');
 // users
 // * our site requires authentication...
 // * so users have a username and password
@@ -28,6 +28,8 @@ const Outfit = new mongoose.Schema({
     temp: {type: Number, required: true},
     //index: {type: Number, required: false}
 });
+
+User.plugin(passportLocalMongoose);
 
 mongoose.model('User', User);
 mongoose.model('Outfit', Outfit);
