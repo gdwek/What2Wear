@@ -17,10 +17,10 @@ body {
 	align-items: center;
 }
 #outer {
-	bottom: 20%;
+	
 	width: 300px;
 	padding: 0em 2em 1em 2em;
-	background-color: blue;
+	background-color:mintcream;
 }
 
 .heading {
@@ -68,6 +68,26 @@ body {
 form div {
 	padding-bottom: 0.5em;
 }
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  }
+  .parent {
+	list-style-type: none;
+	padding: 20px;
+	background: goldenrod;
+	display: grid;
+	grid-gap: 20px;
+	justify-content: center;
+	grid-template-columns: repeat(3, calc(33.33% - 20px));
+  }
+  .child {
+	color: white;
+	padding: 10px;
+	background: teal;
+	margin: 0; /* because we have grid-gap */
+  }
 </style>
 <div class="heading"> What2Wear </div>
 <div id="outer">
