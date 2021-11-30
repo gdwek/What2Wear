@@ -198,8 +198,8 @@ function userOutfits(temperature, user, req, res) {
       console.log(lastDigit);
       if(lastDigit>= 0 && lastDigit<5){
         console.log("im here too")
-        const compliment = 5-lastDigit;//-4
-        const suppliment = 5-compliment;//9
+        const compliment = 5-lastDigit;//2
+        const suppliment = 5-compliment;//3
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp < temperature+compliment);
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
@@ -208,6 +208,7 @@ function userOutfits(temperature, user, req, res) {
         const compliment = lastDigit-5;//4
         const suppliment = 5-compliment;//1
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-compliment && outfit.temp < temperature+suppliment);
+        console.log(outfits_in_range);
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
      // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
