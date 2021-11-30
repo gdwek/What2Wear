@@ -194,18 +194,18 @@ function userOutfits(temperature, user, req, res) {
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     if(outfits){
       const lastDigit = temperature%10;//9
-      if(lastDigit<5){
+    
         const compliment = 5-lastDigit;//-4
         const suppliment = 5-compliment;//9
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp <= temperature+compliment);
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
-      }
-      else{
-        const compliment = lastDigit-5;//4
-        const suppliment = 5-compliment;//1
-        outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-compliment && outfit.temp <= temperature+suppliment);
-        res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
-      }
+      
+      // else{
+      //   const compliment = lastDigit-5;//4
+      //   const suppliment = 5-compliment;//1
+      //   outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-compliment && outfit.temp <= temperature+suppliment);
+      //   res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
+      // }
      // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
     }
     else if (err){
