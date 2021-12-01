@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 const express = require('express');
-const request = require('request');
+var request = require('request');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
