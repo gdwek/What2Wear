@@ -1,7 +1,7 @@
 //1st DRAFT DATA MODEL
 //require('dotenv').config(); 
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+//const passportLocalMongoose = require('passport-local-mongoose');
 // users
 // * our site requires authentication...
 // * so users have a username and password
