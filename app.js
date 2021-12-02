@@ -200,22 +200,6 @@ function apiRetrieval(user, req, res, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
-              if (typeof weather_json !== 'undefined'){
-                req.session.regenerate((err) => {
-                  if (!err)  {
-                      req.session.username = user.username; 
-                      req.session.zipcode = '10002';
-                      user.zipcode = '10002';
-                      user.save(function(err, user) {
-                        if(err){
-                          console.log('error');
-                          return res.send('an error has occurred, please check the server output');
-                        }
-                      });
-                  } 
-                });
-              return res.render('zipcodeError', {'message' : 'we are sorry we did not let you know earlier, but that was not a valid zipcode. we have reset it to a default zipcode'});
-            }
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
             request(weatherURL, function(error, response, body) {
