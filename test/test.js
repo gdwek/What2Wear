@@ -1,10 +1,5 @@
 const expect  = require('chai').expect;
 const request = require('request');
-const chai = require("chai");
-const sinon = require("sinon");
-// const faker = require("faker");
-// const { User } = require("../db");
-// const app = require("../app");
 
   describe ('home page', function() {
       it('status', function(done){
@@ -33,7 +28,7 @@ describe ('signup', function() {
     });
 });
 
-describe ('accessing view without logging in', function() {
+describe ('accessing zipcode without logging in', function() {
     it('status', function(done){
         request('https://enigmatic-wave-01914.herokuapp.com/zipcode', function(error, response, body) {
             expect(response.statusCode).to.equal(200);

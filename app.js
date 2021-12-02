@@ -115,24 +115,39 @@ app.get('/zipcode', (req, res) => {
   });
 
 app.get('/changedZipcode', (req, res) => {
-  res.render('changedZipcode');
+  if(req.session.username){
+    res.render('changedZipcode');
+  }
+  else {
+    return res.render('error', {'message' : 'sorry, you have to log in to access this page.'});
+  }
 });
 
 app.get('/manage', (req, res) => {
-  res.render('manage');
+  if(req.session.username){
+    res.render('manage');
+  }
+  else {
+    return res.render('error', {'message' : 'sorry, you have to log in to access this page.'});
+  }
 });
 
 
 app.get('/view', (req, res) => {
-  User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
-    if(outfits){
-      res.render('view', {'outfits': outfits.outfits});
-    }
-    else if (err){
-      console.log('error');
-      return res.send('an error has occurred, please check the server output');
-    }
-  }) 
+  if (req.session.username){
+    User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
+      if(outfits){
+        res.render('view', {'outfits': outfits.outfits});
+      }
+      else if (err){
+        console.log('error');
+        return res.send('an error has occurred, please check the server output');
+      }
+    }) 
+  }
+  else {
+    return res.render('error', {'message' : 'sorry, you have to log in to access this page.'});
+  }
   // User.findOne({username: req.session.username}, (err, user) => {
   //   if(err){
   //     console.log('error');
@@ -184,9 +199,6 @@ app.get("/logout", function(req, res) {
 function apiRetrieval(user, req, res, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
-            if(error){
-              return res.render('error', {'message' : 'invalid zipcode'});
-            }
             let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
@@ -278,7 +290,7 @@ app.post('/login', (req, res) => {
                   });
               }
               else if (!passwordMatch){
-                  return res.render('error', {'message' : 'user does not exist'});
+                  return res.render('error', {'message' : 'wrong password'});
               }
               else if (err){
                   console.log('error');
@@ -306,9 +318,16 @@ app.post('/signup', (req, res) => {
           console.log('error');
           return res.send('an error has occurred, please check the server output');
       }
+      if(req.body.username.length < 1){
+        return res.render('error', {'message' : 'please enter a username'});
+      } 
       if(req.body.password.length < 8){ //checking if password too short
-          return res.render('error', {'message' : 'pw length issue'});
+        return res.render('error', {'message' : 'pw length issue'});
       }  
+      var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(req.body.zipcode);
+      if(!isValidZip){
+        return res.render('error', {'message' : 'invalid zipcode'});
+      }
       else {
           bcrypt.hash(req.body.password, 10, function(err, hash) {
               if(err){
