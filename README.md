@@ -80,7 +80,7 @@ An Example Outfit:
 
 'outfit' should be home again
 
-![sitemap](documentation/New site.png)
+![sitemap](documentation/NewSite.png)
 
 ## User Stories or Use Cases
 
