@@ -199,7 +199,7 @@ app.get("/logout", function(req, res) {
 function apiRetrieval(user, req, res, callback){
       const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
       request(locationsURL, function(error, response, body) {
-             if(error){
+             if(body == undefined){
               req.session.regenerate((err) => {
                 if (!err)  {
                     req.session.username = user.username; 
