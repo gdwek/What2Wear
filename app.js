@@ -369,6 +369,10 @@ app.post('/signup', (req, res) => {
 app.post('/zipcode', (req, res) => {
   User.findOne({username: req.session.username}, (err, user) => {
       if(!err && user){
+        var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(req.body.zipcode);
+        if(!isValidZip){
+          return res.render('error', {'message' : 'invalid zipcode'});
+        }
           req.session.regenerate((err) => {
               if (!err )  {
                   req.session.username = user.username; 
@@ -409,8 +413,14 @@ app.post('/create', (req, res) => {
   //console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
-          console.log(req.body);
+          //console.log(req.body);
           //console.log(req.body.scarf_gloves);
+          if(req.body.top.length<1){
+            return res.render('error', {'message' : 'please enter a top'});
+          }
+          if(req.body.bottom.length<1){
+            return res.render('error', {'message' : 'please enter a bottom'});
+          }
           if (req.body.jacket == 'yes'){
             req.body.jacket = true;
           }
