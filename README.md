@@ -78,6 +78,8 @@ An Example Outfit:
 
 ## Site map
 
+'outfit' should be home again
+
 ![sitemap](documentation/sitemap.jpeg)
 
 ## User Stories or Use Cases
