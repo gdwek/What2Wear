@@ -106,7 +106,12 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/zipcode', (req, res) => {
-  res.render('zipcode');
+  if(req.session.username){
+    res.render('zipcode');
+  }
+  else {
+    return res.render('error', {'message' : 'sorry, you have to log in to access this page.'});
+  }
   });
 
 app.get('/changedZipcode', (req, res) => {
