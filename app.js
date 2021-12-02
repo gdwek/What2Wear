@@ -216,8 +216,6 @@ function apiRetrieval(user, req, res, callback){
                 });
               return res.render('error', {'message' : 'we are sorry we did not let you know earlier, but that was not a valid zipcode. we have reset it to a default zipcode'});
             }
-
-            let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
             const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
             request(weatherURL, function(error, response, body) {
