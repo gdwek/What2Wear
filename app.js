@@ -7,29 +7,10 @@ var request = require('request');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-// const passport = require('passport');
-// const LocalStrategy = require('passport-local');
-// //const connectEnsureLogin = require('connect-ensure-login'); 
-// const flash = require('connect-flash');
 const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connected to the DB')).catch(err => console.error('Error while connecting to DB', err));
-
-// new window.JustValidate('.zipcode', {
-//     Rules: {
-//       zip: {
-//         required: true,
-//         zip: true
-//       },
-//     },
-//     Messages: {
-//       required: 'The field is required',
-//     },
-//     colorWrong: "#B81111"
-// });
-
-// enable sessions
 
 const session = require('express-session');
 const sessionOptions = {
@@ -50,32 +31,9 @@ const Outfit = mongoose.model('Outfit');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(User.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-// app.use(flash());
-
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     User.findOne({ username: username }, function (err, user) {
-//       if (err) { 
-//         return done(err); 
-//       }
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (!user.verifyPassword(password)) { 
-//         return done(null, false, { message: 'Incorrect password.' });
-//       }
-//       return done(null, user);
-//     });
-//   }
-// ));
 
 app.get('/', (req, res) => {
   if(req.session.username){
@@ -148,43 +106,6 @@ app.get('/view', (req, res) => {
   else {
     return res.render('error', {'message' : 'sorry, you have to log in to access this page.'});
   }
-  // User.findOne({username: req.session.username}, (err, user) => {
-  //   if(err){
-  //     console.log('error');
-  //     return res.send('an error has occurred, please check the server output');
-  //   }
-  //   else if (user){
-  //     console.log('here i am');
-  //     user.populate('outfits').exec(function(err, outfits) {
-  //       res.render('view', {outfits: outfits});
-  //     }) 
-
-  //     }
-  //   //   const outfits_local = [];
-  //   //   user.outfits.forEach((value, array) => {
-  //   //     Outfit.findOne({_id: value}, (err, outfit) => {
-  //   //       if(err){
-  //   //         console.log('error');
-  //   //         return res.send('an error has occurred, please check the server output');
-  //   //       }
-  //   //       else if (outfit){
-  //   //         outfits_local.push(outfit);
-  //   //         console.log('[ushed outfit')
-  //   //       }
-  //   //       else {
-  //   //         console.log('no outfits');
-  //   //       }
-  //   //     });
-  //   //   });
-  //   //   res.render('view', {outfits: outfits_local});
-  //   // }
-  //   // else if (!err && !user){
-  //   //   console.log('hi');
-  //   // }
-    // else {
-    //   return res.render('error', {'message' : 'user does not exist'});
-    // }
-  //});
 });
 
 
@@ -214,24 +135,24 @@ function userOutfits(temperature, user, req, res) {
   User.findOne({username: req.session.username}).populate('outfits').exec(function(err, outfits) {
     if(outfits){
       console.log('im over here!!!!');
-      const lastDigit = temperature%10;//9
+      const lastDigit = temperature%10;
       console.log(lastDigit);
       if(lastDigit>= 0 && lastDigit<5){
         console.log("im here too")
-        const compliment = 5-lastDigit;//2
-        const suppliment = 5-compliment;//3
+        const compliment = 5-lastDigit;
+        const suppliment = 5-compliment;
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-suppliment && outfit.temp < temperature+compliment);
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
       else if (lastDigit>5 && lastDigit <= 9){
         console.log('im here!!!!');
-        const compliment = lastDigit-5;//4
-        const suppliment = 5-compliment;//1
+        const compliment = lastDigit-5;
+        const suppliment = 5-compliment;
         outfits_in_range = outfits.outfits.filter( outfit => outfit.temp >= temperature-compliment && outfit.temp < temperature+suppliment);
-        //console.log(outfits_in_range);
+  
         res.render('index', {user: user.username, temperature: temperature, outfits: outfits_in_range, home: true});
       }
-     // const lastDigits = outfits.outfits.map(outfit => outfit.temp%10);
+     
     }
     else if (err){
       console.log('error');
@@ -243,9 +164,7 @@ function userOutfits(temperature, user, req, res) {
   }) 
 };
 
-// function renderWeather(temperature, user, req, res){
-//   res.render('index', {user: user.username, temperature: temperature, home: true});
-// }
+
 function newOutfitWeather (temperature, user, req, res){
       new Outfit({
         user: user,
@@ -268,11 +187,7 @@ function newOutfitWeather (temperature, user, req, res){
     });
 };
 
-// app.post('/login',
-//   passport.authenticate('local', { successRedirect: '/',
-//                                    failureRedirect: '/login',
-//                                    failureFlash: true })
-// );
+
 app.post('/login', (req, res) => {
   User.findOne({username: req.body.username}, (err, user) => {
       if (!err && user) {
@@ -410,11 +325,8 @@ app.post('/zipcode', (req, res) => {
 
 
 app.post('/create', (req, res) => {
-  //console.log(req.session.username);
   User.findOne({username: req.session.username}, (err, user) => {
         if (!err && user){
-          //console.log(req.body);
-          //console.log(req.body.scarf_gloves);
           if(req.body.top.length<1){
             return res.render('error', {'message' : 'please enter a top'});
           }
