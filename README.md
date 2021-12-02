@@ -104,7 +104,7 @@ An Example Outfit:
 * (3 points) Unit Testing with Mocha
     * will make unit tests for each page
     * this will allow me to make sure my application is working as I go
-    * see references #4
+    * see references #3
 
 6 points total out of 8 required points 
 
@@ -115,6 +115,5 @@ An Example Outfit:
 
 1. [locations API](https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/postalcodes/search) - API documentation
 2. [current conditions API](https://developer.accuweather.com/accuweather-current-conditions-api/apis/get/currentconditions/v1/%7BlocationKey%7D) - API documentation
-3. [Just-validate](https://www.cssscript.com/custom-html5-form-validator-vanilla-javascript-just-validate/) - Javascript library Just-validate for client side form validation
-4. [mocha unit testing ](https://github.com/mochajs/mocha) - github repo for mocha unit testing
+3. [mocha unit testing ](https://github.com/mochajs/mocha) - github repo for mocha unit testing
 
