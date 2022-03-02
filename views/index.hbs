@@ -1,6 +1,7 @@
 <h1>What2Wear Homepage</h1>
 {{#if user}}
 <span class="weather">It's {{temperature}}°F Today!</span>
+<br>
 {{#if outfits}}
 <span class="outfits">In this weather, you've worn:</span>
     <ul class='parent'> 
@@ -22,6 +23,7 @@
 {{else}}
 <span class="outfits">You haven't logged any outfits for this weather yet! Head over to 'Manage Outfits' to log what you're wearing.</span>
 {{/if}}
+<br>
 <span class="success">Currently logged in as: {{user}}</span>
 <a href="manage">Manage Outfits</a> or  <a href="zipcode">Change Location</a> or <a href="logout">Log Out</a> or <a href="view">View Outfits</a>. 
 {{else}}
