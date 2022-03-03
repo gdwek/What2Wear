@@ -1,6 +1,6 @@
 require('./db');
 require('dotenv').config(); 
-
+console.log(process.env)
 
 const express = require('express');
 var request = require('request');
