@@ -9,9 +9,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose  = require('mongoose');
 const bcrypt = require('bcryptjs');
-print('before uri')
+console.log('before uri')
 const uri = process.env.MONGODB_URI;
-print('after uri')
+console.log('after uri')
 mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connected to the DB')).catch(err => console.error('Error while connecting to DB', err));
 
 const session = require('express-session');
