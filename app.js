@@ -14,7 +14,7 @@ mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connecte
 
 const session = require('express-session');
 const sessionOptions = {
-    secret: 'secret cookie thang (store this elsewhere!)',
+    secret: SECRET_KEY,
     resave: true,
       saveUninitialized: true
 };
@@ -118,11 +118,11 @@ app.get("/logout", function(req, res) {
 });
 
 function apiRetrieval(user, req, res, callback){
-      const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG&q=" + user.zipcode;
+      const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=" + LOCATIONS_API_KEY + user.zipcode;
       request(locationsURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
-            const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + "?apikey=QFHUQmXwDaHJ1lqAlP4CTtDATkFA8RcG";
+            const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + CURRENT_CONDITIONS_API_KEY;
             request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
@@ -237,7 +237,7 @@ app.post('/signup', (req, res) => {
         return res.render('error', {'message' : 'please enter a username'});
       } 
       if(req.body.password.length < 8){ //checking if password too short
-        return res.render('error', {'message' : 'pw length issue'});
+        return res.render('errocr', {'message' : 'pw length issue'});
       }  
       var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(req.body.zipcode);
       if(!isValidZip){
