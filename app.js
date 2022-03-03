@@ -16,7 +16,7 @@ mongoose.connect(uri, {useNewUrlParser: true}).then((x) => console.log('Connecte
 
 const session = require('express-session');
 const sessionOptions = {
-    secret: SECRET_KEY,
+    secret: process.env.SECRET_KEY,
     resave: true,
       saveUninitialized: true
 };
@@ -120,11 +120,11 @@ app.get("/logout", function(req, res) {
 });
 
 function apiRetrieval(user, req, res, callback){
-      const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=" + LOCATIONS_API_KEY + user.zipcode;
+      const locationsURL = "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=" + process.env.LOCATIONS_API_KEY + user.zipcode;
       request(locationsURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
             const key =  weather_json[0].Key;
-            const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + CURRENT_CONDITIONS_API_KEY;
+            const weatherURL = "http://dataservice.accuweather.com/currentconditions/v1/" + key + process.env.CURRENT_CONDITIONS_API_KEY;
             request(weatherURL, function(error, response, body) {
               let weather_json = JSON.parse(body);
               const temperature =  weather_json[0].Temperature.Imperial.Value;
