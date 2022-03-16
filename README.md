@@ -7,6 +7,10 @@ Ever find yourself opening the weather app, seeing "60 degrees and windy" and th
 
 What2Wear is a web app that will allow users to record what they have worn in the past for certain temperatures. Users can register and login. Once they're logged in, they will be told the current weather and what they wore when it was this weather in the past. If the user hasn't logged anything for that temperature range, they will be provided with the option to log what they actually end up wearing that day for future purposes, or to change their location.
 
+## How to Run
+
+Click on this link: https://frozen-scrubland-92156.herokuapp.com
+
 
 ## Data Model
 
